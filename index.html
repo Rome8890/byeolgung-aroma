@@ -1,0 +1,1964 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#201126">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="별궁시아 아로마타로 — 신화와 향으로 만나는 오늘의 마음. 타로 · 사주 · 심리상담 · 향담">
+  <title>별궁시아 · 아로마타로</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #201126;
+      --bg-surface: #24112d;
+      --ink: #faedcf;
+      --muted: #d5bfd7;
+      --gold: #e4bf7c;
+      --gold-bright: #ffd992;
+      --line: rgba(176, 138, 88, 0.3);
+      --font-serif: 'Noto Serif KR', serif;
+      --font-sans: 'Noto Sans KR', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #25122d url('assets/background.webp') right top/auto 100vh fixed no-repeat;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(22, 12, 32, 0.85), rgba(36, 16, 45, 0.5), rgba(22, 12, 32, 0.8));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      background: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ====================================================
+       1. 인트로 / 스플래시 화면 (첫 화면 이미지 & 터치 진입)
+       ==================================================== */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(circle at center, #2e1538 0%, #17091c 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+      cursor: pointer;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+    }
+
+    #splash-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-card-wrap {
+      position: relative;
+      max-width: 440px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(228, 191, 124, 0.25);
+      border: 1.5px solid rgba(228, 191, 124, 0.45);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: floatPoster 4s ease-in-out infinite alternate;
+    }
+
+    .splash-card-wrap:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 50px rgba(228, 191, 124, 0.4);
+    }
+
+    @keyframes floatPoster {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .splash-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .splash-enter-badge {
+      position: absolute;
+      bottom: 68px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, rgba(236, 210, 154, 0.95), rgba(204, 160, 95, 0.95));
+      color: #26112e;
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(236, 210, 154, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      animation: pulseBadge 2s infinite;
+      pointer-events: auto;
+    }
+
+    @keyframes pulseBadge {
+      0% { transform: translateX(-50%) scale(1); box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 15px rgba(236,210,154,0.4); }
+      50% { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 30px rgba(236,210,154,0.85); }
+      100% { transform: translateX(-50%) scale(1); box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 15px rgba(236,210,154,0.4); }
+    }
+
+    /* 포스터 하단 소셜 채널 핫스팟 링크 */
+    .splash-links-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 15px;
+      background: linear-gradient(to top, rgba(20, 8, 26, 0.85) 0%, rgba(20, 8, 26, 0) 100%);
+      z-index: 10;
+    }
+
+    .social-btn {
+      color: #fff;
+      font-size: 11px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(228, 191, 124, 0.25);
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .social-btn:hover {
+      background: rgba(228, 191, 124, 0.25);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .splash-hint-bottom {
+      margin-top: 14px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      opacity: 0.9;
+      font-family: var(--font-serif);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ====================================================
+       2. 메인 웹사이트 레이아웃 & 헤더
+       ==================================================== */
+    header {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 22px 36px;
+      background: rgba(33, 16, 39, 0.85);
+      border: 1px solid var(--line);
+      border-top: 0;
+      border-radius: 0 0 16px 16px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--ink);
+    }
+
+    .brand small {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .re-splash-btn {
+      font-size: 10px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 20px;
+      padding: 3px 9px;
+      transition: all 0.2s;
+    }
+
+    .re-splash-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    button.plain {
+      background: none;
+      border: 0;
+      color: #dec6df;
+      padding: 8px 4px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    button.plain:hover {
+      color: var(--gold);
+    }
+
+    button.plain.active {
+      color: #f9dfad;
+      border-bottom: 2px solid #d6b171;
+      font-weight: 500;
+    }
+
+    main {
+      max-width: 1140px;
+      margin: 28px auto;
+      padding: 48px 32px 40px;
+      background: rgba(33, 17, 39, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 20px 70px rgba(16, 5, 25, 0.45);
+      backdrop-filter: blur(8px);
+    }
+
+    .view[hidden], [hidden] {
+      display: none !important;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+
+    h1 {
+      font-size: 44px;
+      line-height: 1.45;
+      margin: 16px 0;
+      color: var(--ink);
+    }
+
+    p {
+      line-height: 1.85;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .rule {
+      width: 44px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px 0;
+    }
+
+    /* ====================================================
+       3. 카드 뽑기 뷰 (#home)
+       ==================================================== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      min-height: 420px;
+    }
+
+    .intro p {
+      font-size: 15px;
+      color: #e4cfe4;
+      margin-bottom: 20px;
+    }
+
+    .stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(177, 123, 181, 0.22) 0%, transparent 68%);
+      border-radius: 20px;
+    }
+
+    .card {
+      width: 174px;
+      height: 288px;
+      border-radius: 12px;
+      background: #261b35;
+      box-shadow: 0 16px 32px rgba(16, 5, 25, 0.5);
+      border: 1.5px solid #d8b878;
+      color: #ddc89d;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .side {
+      position: absolute;
+      transform: rotate(-16deg) translate(-95px, 8px);
+      background: url('assets/back.webp') center/cover;
+      opacity: 0.85;
+    }
+
+    .side.right {
+      transform: rotate(16deg) translate(95px, 8px);
+    }
+
+    .front {
+      z-index: 2;
+    }
+
+    .back-art {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .stage-caption {
+      position: absolute;
+      bottom: 8px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #dec9df;
+    }
+
+    .reading-panel {
+      border-top: 1px solid var(--line);
+      margin-top: 36px;
+      padding-top: 32px;
+    }
+
+    .reading-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 0 0 30px;
+    }
+
+    .reading-option {
+      text-align: left;
+      border: 1px solid rgba(185, 149, 106, 0.35);
+      background: rgba(44, 25, 53, 0.75);
+      border-radius: 12px;
+      padding: 22px;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      transition: all 0.25s;
+    }
+
+    .reading-option:hover {
+      border-color: var(--gold);
+      background: rgba(56, 34, 62, 0.9);
+    }
+
+    .reading-option.selected {
+      border-color: #e8c588;
+      background: linear-gradient(135deg, rgba(100, 67, 86, 0.45), rgba(56, 34, 62, 0.95));
+      box-shadow: inset 0 0 0 1px rgba(232, 197, 136, 0.35), 0 8px 24px rgba(16, 5, 25, 0.4);
+    }
+
+    .reading-option.selected::after {
+      content: '✓';
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      color: #f1d297;
+      font-size: 18px;
+    }
+
+    .reading-option strong {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .reading-option > span:not(.eyebrow) {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .reading-option b {
+      font-size: 20px;
+      font-weight: 500;
+      color: #f3d79e;
+    }
+
+    .reading-option b small {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-head h2 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .step {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .topics {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 22px 0;
+    }
+
+    .chip {
+      border: 1px solid rgba(205, 167, 102, 0.4);
+      background: rgba(49, 27, 59, 0.4);
+      border-radius: 30px;
+      padding: 10px 22px;
+      color: #e4cfe4;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+
+    .chip.active {
+      background: #dfb975;
+      border-color: #dfb975;
+      color: #291632;
+      font-weight: 600;
+    }
+
+    .question {
+      width: 100%;
+      padding: 16px 0;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: #faedcf;
+      outline: none;
+      font-size: 15px;
+      transition: border-color 0.2s;
+    }
+
+    .question::placeholder {
+      color: #d5bdd0;
+    }
+
+    .question:focus {
+      border-color: var(--gold);
+    }
+
+    .draw-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .primary {
+      background: linear-gradient(115deg, #ecd29a, #cca05f);
+      color: #2d1932;
+      border: 0;
+      border-radius: 6px;
+      padding: 16px 32px;
+      min-width: 220px;
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 7px 24px rgba(16, 5, 28, 0.4);
+      transition: all 0.25s;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .primary:hover {
+      background: #f2dba9;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(228, 191, 124, 0.25);
+    }
+
+    .primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .draw-row small {
+      color: #e4cfe4;
+      font-size: 12px;
+    }
+
+    .shop-teaser {
+      margin-top: 48px;
+      padding: 28px;
+      border: 1px solid rgba(184, 149, 102, 0.35);
+      border-radius: 14px;
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      background: rgba(54, 32, 61, 0.6);
+    }
+
+    .shop-teaser img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .shop-teaser h3 {
+      font-size: 22px;
+      margin: 8px 0;
+    }
+
+    .shop-teaser p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .shop-teaser button {
+      min-width: 0;
+      padding: 12px 22px;
+      font-size: 14px;
+    }
+
+    .bottom-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      margin-top: 50px;
+      padding-top: 32px;
+      gap: 32px;
+    }
+
+    .bottom-info h3 {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    .bottom-info p {
+      font-size: 12px;
+      color: #e4cfe4;
+      line-height: 1.8;
+    }
+
+    .number {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    /* ====================================================
+       4. 카드 도감 뷰 (#cards)
+       ==================================================== */
+    .section-title {
+      font-size: 34px;
+      margin: 12px 0 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .mini {
+      background: rgba(49, 27, 60, 0.75);
+      border: 1px solid rgba(176, 138, 88, 0.35);
+      padding: 20px;
+      text-align: left;
+      color: #faedcf;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mini:hover {
+      border-color: #e4bf7c;
+      background: #40264b;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .mini-art {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      margin: 14px 0;
+      box-shadow: 0 6px 20px rgba(18, 8, 24, 0.4);
+      transition: transform 0.3s;
+    }
+
+    .mini:hover .mini-art {
+      transform: scale(1.02);
+    }
+
+    .mini h3 {
+      font-size: 19px;
+      margin: 6px 0;
+    }
+
+    .mini p {
+      margin: 0;
+      font-size: 12px;
+      color: #d6c0d8;
+    }
+
+    /* ====================================================
+       5. 마음 기록 뷰 (#journal)
+       ==================================================== */
+    .entry {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .entry h3 {
+      font-size: 22px;
+      margin: 8px 0;
+    }
+
+    .entry p {
+      white-space: pre-wrap;
+      line-height: 1.8;
+      margin-top: 6px;
+    }
+
+    .entry button {
+      float: right;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .entry button:hover {
+      color: #ff9d9d;
+      border-color: #ff9d9d;
+    }
+
+    .empty {
+      padding: 80px 0;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty p {
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+
+    /* ====================================================
+       6. 향담 구매 뷰 (#shop)
+       ==================================================== */
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin: 32px 0;
+    }
+
+    .shop-figure {
+      margin: 0;
+    }
+
+    .shop-figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--line);
+    }
+
+    .shop-figure figcaption {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .shop-copy h2 {
+      font-size: 30px;
+      margin: 8px 0 14px;
+    }
+
+    .buy-link {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      margin: 14px 0;
+      line-height: 1.7;
+      padding: 16px 20px;
+    }
+
+    .secondary {
+      border: 1px solid rgba(201, 168, 116, 0.55);
+      border-radius: 6px;
+      color: #f0d29e;
+      background: transparent;
+      padding: 14px 20px;
+      font-size: 14px;
+      transition: all 0.2s;
+      text-align: center;
+      display: block;
+    }
+
+    .secondary:hover {
+      background: rgba(228, 191, 124, 0.15);
+      border-color: var(--gold);
+    }
+
+    .aroma {
+      background: #472c4c;
+      border-radius: 8px;
+      padding: 18px;
+      margin: 22px 0;
+      border: 1px solid rgba(228, 191, 124, 0.25);
+    }
+
+    .aroma h3 {
+      margin: 4px 0;
+      font-size: 20px;
+    }
+
+    .aroma p {
+      font-size: 13px;
+      margin-bottom: 0;
+      color: #e8d5df;
+    }
+
+    .copy-inquiry {
+      background: none;
+      border: 0;
+      border-bottom: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 0;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .purchase-box {
+      background: linear-gradient(130deg, #492a50, #32203c);
+      padding: 22px;
+      border: 1px solid rgba(210, 175, 116, 0.35);
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    .purchase-box h3 {
+      margin: 8px 0;
+      font-size: 21px;
+    }
+
+    .purchase-box p {
+      font-size: 13px;
+      color: #e4cfe4;
+    }
+
+    .purchase-status, .status {
+      font-size: 12px;
+      color: var(--gold);
+      min-height: 20px;
+      margin-top: 6px;
+    }
+
+    .notice {
+      font-size: 11px;
+      color: #d0bad2;
+      line-height: 1.8;
+      margin-top: 24px;
+    }
+
+    /* ====================================================
+       7. 모달 (결과 다이얼로그 & 결제 안내 다이얼로그)
+       ==================================================== */
+    dialog {
+      border: 1px solid #a98355;
+      border-radius: 16px;
+      background: #29172f;
+      color: #faedcf;
+      padding: 36px;
+      max-width: 580px;
+      width: calc(100% - 32px);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+    }
+
+    dialog::backdrop {
+      background: rgba(21, 10, 28, 0.82);
+      backdrop-filter: blur(6px);
+    }
+
+    .close {
+      float: right;
+      border: 0;
+      background: transparent;
+      color: #e4cfdf;
+      font-size: 28px;
+      line-height: 1;
+      padding: 0 4px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close:hover {
+      color: var(--gold);
+    }
+
+    .result-head {
+      text-align: center;
+    }
+
+    .result-art {
+      display: block;
+      width: 220px;
+      max-width: 75%;
+      height: auto;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 12px 35px rgba(16, 5, 23, 0.8);
+      border: 1px solid rgba(228, 191, 124, 0.4);
+    }
+
+    .result-head h2 {
+      font-size: 30px;
+      margin: 6px 0;
+    }
+
+    .tag {
+      font-size: 13px;
+      color: var(--gold);
+    }
+
+    .result-box {
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+      padding-top: 16px;
+    }
+
+    .result-box h3 {
+      font-size: 18px;
+      margin: 14px 0 6px;
+      color: #ffd992;
+    }
+
+    .result-box p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .wish {
+      color: #efd09c;
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .journal-input {
+      width: 100%;
+      border: 1px solid rgba(157, 126, 121, 0.35);
+      background: #3c2545;
+      padding: 14px;
+      border-radius: 6px;
+      resize: vertical;
+      min-height: 85px;
+      color: #fff1d6;
+      margin-top: 16px;
+      outline: none;
+    }
+
+    .journal-input::placeholder {
+      color: #d5bdd0;
+    }
+
+    .journal-input:focus {
+      border-color: var(--gold);
+    }
+
+    /* 세 장 리딩 모달 */
+    .three-preview {
+      display: flex;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .three-preview > div {
+      flex: 1;
+      text-align: center;
+    }
+
+    .three-preview img {
+      width: 100%;
+      max-width: 125px;
+      border-radius: 6px;
+      box-shadow: 0 6px 20px rgba(18, 8, 24, 0.4);
+      border: 1px solid rgba(228, 191, 124, 0.3);
+    }
+
+    .three-preview span {
+      display: block;
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 10px;
+    }
+
+    .order-summary {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      margin: 20px 0;
+      gap: 15px;
+    }
+
+    .order-summary span {
+      font-size: 14px;
+    }
+
+    .order-summary strong {
+      font-size: 26px;
+      font-weight: 500;
+      color: #f3d79e;
+    }
+
+    .payment-pending {
+      padding: 18px;
+      background: #3b2644;
+      border-radius: 8px;
+      margin: 20px 0;
+      color: #e8d5df;
+      border: 1px solid rgba(228, 191, 124, 0.2);
+    }
+
+    .payment-pending strong {
+      font-size: 15px;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .payment-pending p {
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+
+    .free-return {
+      width: 100%;
+      background: transparent;
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .checkout-question {
+      padding: 14px 0;
+      font-size: 13px;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      border-top: 1px solid var(--line);
+    }
+
+    /* 카드 셔플 애니메이션 */
+    .shuffle {
+      animation: sh 0.65s infinite;
+    }
+
+    @keyframes sh {
+      0% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(6deg) translateY(-14px); }
+      100% { transform: rotate(0deg) translateY(0); }
+    }
+
+    /* 푸터 (PG 심사용 사업자 정보 & 이용약관) */
+    footer {
+      max-width: 1140px;
+      margin: 0 auto 32px;
+      padding: 28px 32px;
+      background: rgba(26, 12, 32, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      font-size: 11.5px;
+      line-height: 1.7;
+      color: #bfa8be;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(228, 207, 223, 0.12);
+    }
+
+    .footer-brand {
+      font-family: "Cinzel Decorative", serif;
+      font-size: 14px;
+      color: #f0d39c;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links button, .footer-links a {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #e4cfdf;
+      font-size: 11.5px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+
+    .footer-links button:hover, .footer-links a:hover {
+      color: #f0d39c;
+    }
+
+    .footer-business {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      color: #9d839c;
+    }
+
+    .footer-business span {
+      display: inline-block;
+      margin-right: 14px;
+    }
+
+    .footer-business strong {
+      color: #c4aec3;
+    }
+
+    .footer-notice {
+      margin-top: 14px;
+      font-size: 10.5px;
+      color: #836a82;
+      border-top: 1px dashed rgba(228, 207, 223, 0.08);
+      padding-top: 10px;
+    }
+
+    /* 정책 모달 본문 */
+    .policy-dialog {
+      max-width: 600px;
+      text-align: left;
+    }
+    .policy-dialog h3 {
+      font-size: 18px;
+      color: #f0d39c;
+      margin-bottom: 14px;
+    }
+    .policy-dialog .policy-body {
+      font-size: 12px;
+      line-height: 1.8;
+      color: #cfb9cc;
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 12px 14px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      border: 1px solid rgba(228, 207, 223, 0.1);
+    }
+    .policy-dialog .policy-body h4 {
+      font-size: 13px;
+      color: #e4cfdf;
+      margin: 12px 0 4px;
+    }
+
+    /* ====================================================
+       8. 반응형 모바일 최적화
+       ==================================================== */
+    @media (max-width: 768px) {
+      header {
+        padding: 16px 14px;
+        border-radius: 0;
+      }
+      .brand {
+        font-size: 17px;
+        letter-spacing: 2px;
+      }
+      .brand small {
+        font-size: 7px;
+        letter-spacing: 2px;
+      }
+      .re-splash-btn {
+        display: none;
+      }
+      .nav {
+        gap: 12px;
+      }
+      button.plain {
+        font-size: 12px;
+        padding: 6px 2px;
+      }
+      main {
+        margin: 12px 10px;
+        padding: 28px 16px;
+        border-radius: 16px;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        min-height: 0;
+      }
+      .intro {
+        text-align: center;
+      }
+      .intro .rule {
+        margin: 18px auto;
+      }
+      h1 {
+        font-size: 32px;
+        margin: 10px 0;
+      }
+      .intro p {
+        font-size: 13px;
+      }
+      .stage {
+        height: 330px;
+      }
+      .card {
+        width: 145px;
+        height: 245px;
+      }
+      .side {
+        transform: rotate(-16deg) translate(-72px, 6px);
+      }
+      .side.right {
+        transform: rotate(16deg) translate(72px, 6px);
+      }
+      .stage-caption {
+        font-size: 10px;
+      }
+      .reading-options {
+        gap: 10px;
+      }
+      .reading-option {
+        padding: 16px 12px;
+        gap: 8px;
+      }
+      .reading-option strong {
+        font-size: 18px;
+      }
+      .reading-option b {
+        font-size: 17px;
+      }
+      .draw-row {
+        display: block;
+      }
+      .primary {
+        width: 100%;
+      }
+      .draw-row small {
+        display: block;
+        text-align: center;
+        margin-top: 12px;
+      }
+      .bottom-info {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 36px;
+      }
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .mini {
+        padding: 14px;
+      }
+      .section-title {
+        font-size: 28px;
+      }
+      .shop-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .shop-copy h2 {
+        font-size: 24px;
+      }
+      .shop-teaser {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 16px;
+      }
+      .shop-teaser img {
+        width: 100px;
+        height: 100px;
+      }
+      footer {
+        flex-direction: column;
+        margin: 0 10px 24px;
+        text-align: center;
+        padding: 18px;
+      }
+      dialog {
+        padding: 22px 18px;
+      }
+      .result-art {
+        width: 190px;
+      }
+    }
+  </style>
+  <!-- 토스페이먼츠 SDK -->
+  <script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+
+  <!-- ====================================================
+       앱 시작 화면 (스플래시 화면 / 인트로 포스터)
+       클릭 시 사이트로 진입
+       ==================================================== -->
+  <div id="splash-screen" role="button" aria-label="별궁시아 입장하기" tabindex="0">
+    <div class="splash-card-wrap">
+      <img class="splash-img" src="assets/splash-main.jpg" alt="별궁시아 아로마타로 대표 포스터 - 별궁시아와 함께 나를 알아가는 시간">
+      
+      <!-- 터치하여 입장하기 가이드 배지 -->
+      <div class="splash-enter-badge">
+        <span>✦</span>
+        <span>터치하여 입장하기</span>
+        <span>✦</span>
+      </div>
+
+      <!-- 포스터 하단 소셜 채널 바로가기 핫스팟 링크 -->
+      <div class="splash-links-overlay" onclick="event.stopPropagation()">
+        <a class="social-btn" href="https://www.youtube.com" target="_blank" rel="noopener">▶ 유튜브</a>
+        <a class="social-btn" href="https://www.tiktok.com" target="_blank" rel="noopener">♬ 틱톡</a>
+        <a class="social-btn" href="https://www.daangn.com" target="_blank" rel="noopener">🥕 당근</a>
+        <a class="social-btn" href="https://m.smartstore.naver.com/sia13" target="_blank" rel="noopener">N 스토어</a>
+        <a class="social-btn" href="https://pf.kakao.com/_pQxgMX" target="_blank" rel="noopener">💬 카톡</a>
+      </div>
+    </div>
+
+    <div class="splash-hint-bottom">
+      <span>포스터를 누르면 타로 뽑기가 시작됩니다</span>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       메인 사이트 네비게이션 헤더
+       ==================================================== -->
+  <header>
+    <div class="brand-wrap" id="brand-home" title="메인 화면으로">
+      <div class="brand">
+        별궁시아
+        <small>BYEOLGUNG SIA</small>
+      </div>
+      <button class="re-splash-btn" id="open-intro-btn" title="포스터 화면 다시 보기">인트로 ✦</button>
+    </div>
+    <nav class="nav" aria-label="주 메뉴">
+      <button class="plain active" data-view="home">카드 뽑기</button>
+      <button class="plain" data-view="cards">카드 도감</button>
+      <button class="plain" data-view="journal">마음 기록</button>
+      <button class="plain" data-view="shop">향담 구매</button>
+    </nav>
+  </header>
+
+  <!-- ====================================================
+       메인 콘텐츠 영역
+       ==================================================== -->
+  <main>
+    <!-- [VIEW 1] 카드 뽑기 뷰 -->
+    <section class="view" id="home">
+      <div class="hero">
+        <div class="intro">
+          <span class="eyebrow">MYTH, AROMA & YOUR INNER VOICE</span>
+          <h1>오늘의 마음에,<br>향 한 방울.</h1>
+          <div class="rule"></div>
+          <p>신화 속 이야기에서 나를 발견하고<br>나에게 어울리는 향으로 잠시 쉬어가세요.</p>
+          <span class="eyebrow" style="font-size:9px">별궁시아 아로마타로 · 22 ARCHETYPES</span>
+        </div>
+        <div class="stage" aria-label="별과 달이 새겨진 아로마타로 카드">
+          <div class="card side"></div>
+          <div class="card side right"></div>
+          <div class="card front" id="deck" title="카드를 눌러 뽑아보세요">
+            <img class="back-art" src="assets/back.webp" alt="별궁시아 별궁과 달·별 장식 카드 뒷면">
+          </div>
+          <span class="stage-caption">잠시 숨을 고르고, 마음이 머무는 곳으로</span>
+        </div>
+      </div>
+
+      <div class="reading-panel">
+        <div class="reading-options" aria-label="리딩 방식 선택">
+          <button type="button" class="reading-option selected" data-reading="one" aria-pressed="true">
+            <span class="eyebrow">DAILY CARD</span>
+            <strong>한 장 리딩</strong>
+            <span>오늘의 메시지와 아로마</span>
+            <b>무료</b>
+          </button>
+          <button type="button" class="reading-option" data-reading="three" aria-pressed="false">
+            <span class="eyebrow">DEEP READING</span>
+            <strong>세 장 리딩</strong>
+            <span>현재 상황 · 장애물 · 조언</span>
+            <b>9,900원 <small>/ 1회</small></b>
+          </button>
+        </div>
+
+        <div class="panel-head">
+          <h2>어떤 마음으로 오셨나요?</h2>
+          <span class="step">01 — CHOOSE & DRAW</span>
+        </div>
+
+        <div class="topics" id="topics">
+          <button class="chip active">오늘의 마음</button>
+          <button class="chip">사랑 · 관계</button>
+          <button class="chip">일 · 성장</button>
+          <button class="chip">돈 · 생활</button>
+        </div>
+
+        <input class="question" id="question" maxlength="150" placeholder="떠오르는 고민을 적어보세요. 비워두셔도 좋아요." aria-label="나의 고민">
+
+        <div class="draw-row">
+          <button class="primary" id="draw">나의 카드 뽑기　↗</button>
+          <small id="reading-hint">22장의 이야기 중, 지금 나를 위한 한 장 · 무료</small>
+        </div>
+      </div>
+
+      <div class="shop-teaser">
+        <img src="assets/hyangdam-collection.webp" alt="향담 컬렉션 복주머니 키링" loading="lazy">
+        <div>
+          <span class="eyebrow">FROM CARD TO SCENT</span>
+          <h3>오늘의 향을 일상 가까이</h3>
+          <p>별궁시아의 아로마 키링, 향담을 만나보세요.</p>
+          <button class="primary" id="home-shop">향담 구매 안내 ↗</button>
+        </div>
+      </div>
+
+      <div class="bottom-info">
+        <div>
+          <span class="number">01 / MYTH</span>
+          <h3>신화가 건네는 질문</h3>
+          <p>신의 이야기에서<br>내 마음을 들여다봐요.</p>
+        </div>
+        <div>
+          <span class="number">02 / AROMA</span>
+          <h3>나에게 머무는 향</h3>
+          <p>카드와 연결된 향의<br>이미지를 만나보세요.</p>
+        </div>
+        <div>
+          <span class="number">03 / JOURNAL</span>
+          <h3>작은 마음의 기록</h3>
+          <p>오늘의 생각 한 줄을<br>차곡차곡 남겨요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- [VIEW 2] 카드 도감 뷰 -->
+    <section class="view" id="cards" hidden>
+      <span class="eyebrow">THE 22 ARCHETYPES</span>
+      <h2 class="section-title">신화와 향의 도감</h2>
+      <p class="muted">카드를 눌러 이야기와 아로마를 만나보세요.</p>
+      <div class="grid" id="card-grid"></div>
+      <p class="notice">별궁시아 원본 카드 이미지 22장과 별궁·달·별 장식 뒷면을 사용했습니다. 메시지와 기원은 아로마 신화 타로 미니설명서에 수록된 내용입니다.</p>
+    </section>
+
+    <!-- [VIEW 3] 마음 기록 뷰 -->
+    <section class="view" id="journal" hidden>
+      <span class="eyebrow">A MOMENT FOR MYSELF</span>
+      <h2 class="section-title">나의 마음 기록</h2>
+      <p class="muted">카드가 건넨 질문, 그리고 내가 찾은 답.</p>
+      <p class="notice">기록은 이 브라우저에만 저장됩니다. 브라우저 데이터를 지우면 기록도 삭제됩니다.</p>
+      <div id="entries"></div>
+    </section>
+
+    <!-- [VIEW 4] 향담 구매 뷰 -->
+    <section class="view" id="shop" hidden>
+      <span class="eyebrow">KEEP YOUR SCENT CLOSE</span>
+      <h2 class="section-title">오늘의 이야기를,<br>향담에 담아보세요.</h2>
+      <div class="shop-layout">
+        <figure class="shop-figure">
+          <img src="assets/hyangdam-collection.webp" alt="향담 컬러 컬렉션 및 선물 포장 안내">
+          <figcaption>향담 컬러 컬렉션 · 실제 판매 구성은 스마트스토어에서 확인해주세요.</figcaption>
+        </figure>
+        <div class="shop-copy">
+          <span class="eyebrow">BYEOLGUNG SIA · HYANGDAM</span>
+          <h2>향을 담는 작은 복주머니</h2>
+          <p>카드에서 만난 이야기와 좋아하는 향을<br>일상 가까이에 두는 아로마 키링, 향담.</p>
+          <div id="shop-match" class="aroma">
+            <p>카드를 뽑으면 연결된 아로마를 여기에서 함께 볼 수 있어요.</p>
+          </div>
+          <p class="muted">색상·향·가격·배송 안내는 스마트스토어에서 확인해주세요. 카드와 연결된 향의 제작 가능 여부는 카카오톡으로 문의하실 수 있어요.</p>
+          <a class="primary buy-link" href="https://m.smartstore.naver.com/sia13" target="_blank" rel="noopener">스마트스토어에서 향담 구매하기 ↗</a>
+          <a class="secondary buy-link" href="https://pf.kakao.com/_pQxgMX" target="_blank" rel="noopener">원하는 향으로 주문 문의 ↗</a>
+          <button class="copy-inquiry" id="shop-copy-message">문의 문구 복사하기</button>
+          <div class="status" id="shop-copy-status" role="status"></div>
+          <p class="notice">구매·결제는 네이버 스마트스토어에서 진행됩니다. 향담의 향과 구성은 판매 중인 상품 및 별도 안내에 따라 달라질 수 있습니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 (PG 심사용 사업자 정보 및 정책) -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">✦ BYEOLGUNG SIA ✦</div>
+      <div class="footer-links">
+        <button type="button" onclick="document.getElementById('modal-terms').showModal()">이용약관</button>
+        <button type="button" onclick="document.getElementById('modal-privacy').showModal()">개인정보처리방침</button>
+        <button type="button" onclick="document.getElementById('modal-refund').showModal()">취소 및 환불정책</button>
+        <a href="https://pf.kakao.com/_pQxgMX" target="_blank" rel="noopener">고객센터 / 카카오톡 문의 ↗</a>
+      </div>
+    </div>
+    <div class="footer-business">
+      <div>
+        <span><strong>상호명:</strong> 별궁시아 (임시)</span>
+        <span><strong>대표자:</strong> 대표자명 (임시)</span>
+        <span><strong>사업자등록번호:</strong> 000-00-00000</span>
+        <span><strong>통신판매업신고번호:</strong> 제2026-서울-0000호</span>
+      </div>
+      <div>
+        <span><strong>사업장 소재지:</strong> 서울특별시 강남구 테헤란로 00, 0층 (임시)</span>
+        <span><strong>고객센터:</strong> 010-0000-0000 / 카카오톡 @별궁시아</span>
+      </div>
+      <div>
+        <span><strong>개인정보보호책임자:</strong> 대표자명 (임시)</span>
+        <span><strong>호스팅 서비스:</strong> Vercel Inc.</span>
+        <span><strong>전자지급결제대행(PG):</strong> (주)토스페이먼츠</span>
+      </div>
+    </div>
+    <div class="footer-notice">
+      본 사이트는 자기 성찰과 심리적 환기를 돕는 문화 콘텐츠를 제공합니다. 결제 및 이용 관련 문의는 고객센터로 연락 주시면 신속히 안내해 드립니다.
+      <br>© 2026 별궁시아 (Byeolgung Sia). All rights reserved.
+    </div>
+  </footer>
+
+  <!-- [DIALOG 1] 카드 결과 다이얼로그 -->
+  <dialog id="result">
+    <button class="close" aria-label="닫기">×</button>
+    <div id="result-content"></div>
+    <div id="save-area">
+      <textarea class="journal-input" id="note" maxlength="2000" placeholder="지금 떠오른 마음을 한 줄 남겨보세요." aria-label="마음 기록"></textarea>
+      <button class="primary" id="save" style="width:100%;margin-top:14px">이 카드와 마음 저장하기</button>
+      <div class="status" id="save-status" role="status"></div>
+    </div>
+  </dialog>
+
+  <!-- [DIALOG 2] 3장 리딩 결제 다이얼로그 -->
+  <dialog id="checkout" aria-labelledby="checkout-title">
+    <button class="close" id="checkout-close" aria-label="결제 안내 닫기">×</button>
+    <span class="eyebrow">THREE-CARD AROMA READING</span>
+    <h2 id="checkout-title">세 장으로 만나는<br>내 마음의 이야기</h2>
+    <div class="three-preview">
+      <div>
+        <img src="assets/back.webp" alt="현재 상황 카드 뒷면">
+        <span>현재 상황</span>
+      </div>
+      <div>
+        <img src="assets/back.webp" alt="장애물 카드 뒷면">
+        <span>장애물</span>
+      </div>
+      <div>
+        <img src="assets/back.webp" alt="조언 카드 뒷면">
+        <span>조언</span>
+      </div>
+    </div>
+    <p>세 장의 카드로 고민을 입체적으로 돌아보고,<br>카드별 심층 메시지와 처방 아로마를 만나요.</p>
+    <div id="checkout-question" class="checkout-question" hidden></div>
+    <div class="order-summary">
+      <span>아로마타로 세 장 리딩 · 1회권</span>
+      <strong>9,900원</strong>
+    </div>
+    <div style="margin: 12px 0 16px; padding: 12px 14px; background: rgba(0,0,0,0.25); border-radius: 10px; border: 1px solid var(--line); text-align: left;">
+      <div style="font-size: 12px; font-weight: 600; color: #f0d39c; margin-bottom: 4px;">💳 토스 간편결제 / 카드결제</div>
+      <p style="font-size: 11px; color: var(--muted); margin: 0; line-height: 1.5;">토스페이, 카카오페이, 네이버페이, 신용/체크카드 지원<br><span style="color:#e4cfdf;">(테스트 결제 모드로 안전하게 체험하실 수 있습니다)</span></p>
+    </div>
+    <button class="primary" id="btn-pay-three-cards" style="width:100%; font-size: 15px; padding: 13px 18px;">9,900원 결제하고 세 장 리딩 시작하기 ✦</button>
+    <button class="secondary free-return" id="checkout-free">무료 한 장 리딩 이용하기</button>
+  </dialog>
+
+  <!-- [POLICY MODAL 1] 이용약관 -->
+  <dialog id="modal-terms" class="policy-dialog">
+    <button class="close" onclick="document.getElementById('modal-terms').close()" aria-label="닫기">×</button>
+    <h3>별궁시아 이용약관</h3>
+    <div class="policy-body">
+      <h4>제1조 (목적)</h4>
+      <p>본 약관은 별궁시아(이하 "회사")가 제공하는 아로마타로 온라인 콘텐츠 및 관련 제반 서비스(이하 "서비스")의 이용과 관련하여 회사와 회원 및 비회원 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+      <h4>제2조 (서비스의 내용 및 성격)</h4>
+      <p>1. 회사가 제공하는 타로 리딩 및 아로마 매칭 콘텐츠는 이용자의 자기 성찰, 심리적 환기 및 영감을 위한 문화·엔터테인먼트 콘텐츠입니다.<br>
+      2. 본 서비스는 의료적 진단이나 법률, 재정적 자문을 대체하지 않습니다.</p>
+      <h4>제3조 (유료 서비스 및 결제)</h4>
+      <p>1. 이용자는 회사가 제공하는 유료 디지털 콘텐츠(세 장 심층 리딩 등)를 토스페이먼츠 등의 전자지급대행업체를 통해 결제할 수 있습니다.<br>
+      2. 결제와 관련된 세부 사항은 전자상거래법 및 관련 법령에 따릅니다.</p>
+    </div>
+  </dialog>
+
+  <!-- [POLICY MODAL 2] 개인정보처리방침 -->
+  <dialog id="modal-privacy" class="policy-dialog">
+    <button class="close" onclick="document.getElementById('modal-privacy').close()" aria-label="닫기">×</button>
+    <h3>개인정보처리방침</h3>
+    <div class="policy-body">
+      <h4>1. 수집하는 개인정보 항목</h4>
+      <p>회사는 서비스 제공 및 결제 이행을 위해 최소한의 개인정보를 수집합니다.<br>
+      - 결제 시: 주문자명, 결제 정보(PG사를 통한 암호화 처리), 이메일, 주문번호<br>
+      - 서비스 이용 시: 접속 로그, 브라우저 정보</p>
+      <h4>2. 개인정보의 보유 및 이용 기간</h4>
+      <p>전자상거래 등에서의 소비자보호에 관한 법률 등 관계 법령의 규정에 따라 일정 기간 보존합니다.<br>
+      - 계약 또는 청약철회 등에 관한 기록: 5년<br>
+      - 대금결제 및 재화 등의 공급에 관한 기록: 5년</p>
+      <h4>3. 개인정보의 제3자 제공</h4>
+      <p>회사는 결제 처리를 위해 (주)토스페이먼츠에 결제 관련 암호화 정보를 제공하며, 그 외 외부에 개인정보를 무단 제공하지 않습니다.</p>
+    </div>
+  </dialog>
+
+  <!-- [POLICY MODAL 3] 취소 및 환불정책 -->
+  <dialog id="modal-refund" class="policy-dialog">
+    <button class="close" onclick="document.getElementById('modal-refund').close()" aria-label="닫기">×</button>
+    <h3>취소 및 환불정책</h3>
+    <div class="policy-body">
+      <h4>1. 디지털 콘텐츠(타로 리딩) 환불 규정</h4>
+      <p>1. 본 서비스의 '세 장 심층 리딩'은 결제 즉시 디지털 콘텐츠가 제공되는 상품입니다.<br>
+      2. '전자상거래 등에서의 소비자보호에 관한 법률' 제17조 제2항 제5호에 따라, 결제 완료 후 카드가 오픈되어 디지털 콘텐츠 제공이 개시된 경우 청약철회(환불)가 제한될 수 있습니다.<br>
+      3. 시스템 오류, 서버 장애 등으로 인해 리딩 결과를 정상적으로 확인하지 못한 경우에는 100% 전액 환불 또는 재이용권을 즉시 지급해 드립니다.</p>
+      <h4>2. 오프라인 실물 상품(향담 복주머니 키링 등)</h4>
+      <p>실물 상품의 교환/반품은 스마트스토어의 판매 규정 및 수령 후 7일 이내 관련 법령에 따릅니다.</p>
+      <h4>3. 환불 접수 창구</h4>
+      <p>카카오톡 채널: @별궁시아 또는 고객센터(010-0000-0000)로 주문번호와 함께 문의해주시면 확인 즉시 처리해 드립니다.</p>
+    </div>
+  </dialog>
+
+  <!-- ====================================================
+       스크립트 (카드 데이터 및 인터랙션 로직)
+       ==================================================== -->
+  <script>
+    // 22장 아로마타로 전체 데이터
+    const cards = [
+      { id: 0, name: "헤르메스", title: "바보", key: "시작 · 호기심 · 자유", oil: "와일드 오렌지", scent: "밝고 달콤한 감귤 향", text: "모든 답을 알아야 시작할 수 있는 것은 아닙니다. 오늘 시도할 작은 일 하나를 골라보세요.", wish: "나는 작은 시작을 허락합니다.", image: "assets/00.webp", symbol: "✧" },
+      { id: 1, name: "헤파이스토스", title: "마법사", key: "창조 · 기술 · 실행", oil: "시더우드", scent: "담백하고 단단한 나무 향", text: "생각을 손에 잡히는 결과로 옮겨보세요. 이미 가진 도구와 경험이 첫 재료입니다.", wish: "나는 나의 가능성을 만들어갑니다.", image: "assets/01.webp", symbol: "✧" },
+      { id: 2, name: "헤카테", title: "여사제", key: "직관 · 고요 · 탐색", oil: "프랑킨센스", scent: "깊고 차분한 수지 향", text: "잠시 소음을 줄이고 내 마음을 들어보세요. 느낌과 확인된 사실을 함께 살펴보세요.", wish: "나는 내 마음을 차분히 듣습니다.", image: "assets/02.webp", symbol: "✧" },
+      { id: 3, name: "데메테르", title: "여황제", key: "돌봄 · 풍요 · 성장", oil: "제라늄", scent: "초록빛이 감도는 꽃 향", text: "돌보는 만큼 나를 돌볼 시간도 필요합니다. 꾸준히 키우고 싶은 것을 하나 정해보세요.", wish: "나는 나와 소중한 것을 돌봅니다.", image: "assets/03.webp", symbol: "✧" },
+      { id: 4, name: "제우스", title: "황제", key: "책임 · 기준 · 질서", oil: "시더우드", scent: "담백하고 단단한 나무 향", text: "무엇을 책임지고 어디까지 맡을지 정해보세요. 분명한 기준이 선택을 도와줍니다.", wish: "나는 내 선택에 중심을 세웁니다.", image: "assets/04.webp", symbol: "✧" },
+      { id: 5, name: "케이론", title: "교황", key: "배움 · 경험 · 안내", oil: "프랑킨센스", scent: "깊고 차분한 수지 향", text: "지나온 경험에서 배울 것을 찾아보세요. 모르는 부분은 도움을 구해도 괜찮습니다.", wish: "나는 경험을 배움으로 바꿉니다.", image: "assets/05.webp", symbol: "✧" },
+      { id: 6, name: "아프로디테", title: "연인", key: "사랑 · 가치 · 선택", oil: "일랑일랑", scent: "풍성하고 달콤한 꽃 향", text: "상대의 반응만큼 나의 가치도 살펴보세요. 어떤 관계와 선택이 나를 존중하는지 물어보세요.", wish: "나는 나를 존중하는 사랑을 선택합니다.", image: "assets/06.webp", symbol: "✧" },
+      { id: 7, name: "아테나", title: "전차", key: "지혜 · 결단 · 전략", oil: "프랑킨센스", scent: "깊고 차분한 수지 향", text: "서두르기보다 상황과 선택지를 정리해보세요. 오늘 실행할 한 가지를 정하면 길이 선명해집니다.", wish: "나는 지혜롭게 나의 길을 선택합니다.", image: "assets/07.webp", symbol: "✧" },
+      { id: 8, name: "헤라클레스", title: "힘", key: "용기 · 인내 · 절제", oil: "시더우드", scent: "담백하고 단단한 나무 향", text: "힘은 참고 버티는 것만을 뜻하지 않습니다. 나의 속도를 지키며 할 수 있는 만큼 나아가세요.", wish: "나는 부드러운 용기로 나아갑니다.", image: "assets/08.webp", symbol: "✧" },
+      { id: 9, name: "헤스티아", title: "은둔자", key: "내면 · 휴식 · 중심", oil: "샌달우드", scent: "부드럽고 묵직한 나무 향", text: "밖의 기대에서 잠시 물러나 나의 중심을 살펴보세요. 편안함을 주는 작은 습관을 마련해보세요.", wish: "나는 나에게 돌아올 자리를 만듭니다.", image: "assets/09.webp", symbol: "✧" },
+      { id: 10, name: "모이라이", title: "운명의 수레바퀴", key: "변화 · 흐름 · 기회", oil: "사이프레스", scent: "맑고 곧은 숲의 향", text: "바꿀 수 있는 것과 없는 것을 구분해보세요. 변화 속에서 내가 할 수 있는 선택을 찾아보세요.", wish: "나는 변화 속에서 나의 몫을 선택합니다.", image: "assets/10.webp", symbol: "✧" },
+      { id: 11, name: "테미스", title: "정의", key: "균형 · 사실 · 공정", oil: "프랑킨센스", scent: "깊고 차분한 수지 향", text: "사실과 감정을 나누어 적어보세요. 나와 상대에게 적용할 기준이 공정한지 살펴보세요.", wish: "나는 균형 있는 선택을 연습합니다.", image: "assets/11.webp", symbol: "✧" },
+      { id: 12, name: "프로메테우스", title: "매달린 사람", key: "관점 · 기다림 · 의미", oil: "샌달우드", scent: "부드럽고 묵직한 나무 향", text: "지금의 멈춤을 다른 관점에서 바라보세요. 계속 지킬 가치와 내려놓을 부담을 구분해보세요.", wish: "나는 다른 시선으로 길을 찾습니다.", image: "assets/12.webp", symbol: "✧" },
+      { id: 13, name: "페르세포네", title: "죽음", key: "마무리 · 전환 · 재생", oil: "사이프레스", scent: "맑고 곧은 숲의 향", text: "끝나는 것과 새롭게 시작할 것을 적어보세요. 다음 단계에 가져갈 것만 남겨도 괜찮습니다.", wish: "나는 마무리와 새 시작을 받아들입니다.", image: "assets/13.webp", symbol: "✧" },
+      { id: 14, name: "이리스", title: "절제", key: "조화 · 연결 · 조율", oil: "제라늄", scent: "초록빛이 감도는 꽃 향", text: "한쪽에 치우친 시간과 마음을 조율해보세요. 서로 다른 필요를 연결할 작은 방법을 찾아보세요.", wish: "나는 나에게 맞는 균형을 만듭니다.", image: "assets/14.webp", symbol: "✧" },
+      { id: 15, name: "디오니소스", title: "악마", key: "욕망 · 몰입 · 경계", oil: "일랑일랑", scent: "풍성하고 달콤한 꽃 향", text: "즐거움을 주는 것이 언제 부담이 되는지 살펴보세요. 나를 지킬 경계를 직접 정해보세요.", wish: "나는 즐거움과 경계를 함께 지킵니다.", image: "assets/15.webp", symbol: "✧" },
+      { id: 16, name: "포세이돈", title: "탑", key: "흔들림 · 직면 · 재구성", oil: "사이프레스", scent: "맑고 곧은 숲의 향", text: "계획이 흔들렸다면 현실을 다시 확인해보세요. 가장 필요한 기초부터 하나씩 세워보세요.", wish: "나는 흔들림 속에서도 다시 세웁니다.", image: "assets/16.webp", symbol: "✧" },
+      { id: 17, name: "엘피스", title: "별", key: "희망 · 회복 · 가능성", oil: "로즈우드", scent: "은은한 꽃 기운의 나무 향", text: "결과를 서두르기보다 가능한 다음 걸음을 찾아보세요. 작은 진전도 기록할 가치가 있습니다.", wish: "나는 작은 가능성을 이어갑니다.", image: "assets/17.webp", symbol: "✧" },
+      { id: 18, name: "셀레네", title: "달", key: "감정 · 상상 · 불확실", oil: "라벤더", scent: "부드럽고 포근한 허브 꽃 향", text: "불확실할 때는 상상과 사실이 섞이기 쉽습니다. 확인할 것과 잠시 기다릴 것을 나누어보세요.", wish: "나는 감정을 존중하고 사실을 확인합니다.", image: "assets/18.webp", symbol: "✧" },
+      { id: 19, name: "아폴론", title: "태양", key: "표현 · 기쁨 · 명료", oil: "클라리세이지", scent: "따뜻하고 부드러운 허브 향", text: "잘된 일과 자신 있게 표현할 것을 찾아보세요. 나의 기쁨을 다른 사람과 나누어도 좋습니다.", wish: "나는 나의 빛을 편안히 표현합니다.", image: "assets/19.webp", symbol: "✧" },
+      { id: 20, name: "하데스", title: "심판", key: "성찰 · 정리 · 새결정", oil: "페퍼민트", scent: "시원하고 또렷한 민트 향", text: "지나온 선택을 비난 없이 돌아보세요. 지금의 나에게 맞는 결정을 새롭게 내릴 수 있습니다.", wish: "나는 나를 돌아보고 다시 선택합니다.", image: "assets/20.webp", symbol: "✧" },
+      { id: 21, name: "가이아", title: "세계", key: "완성 · 통합 · 연결", oil: "라벤더", scent: "부드럽고 포근한 허브 꽃 향", text: "여기까지 해낸 일을 인정해보세요. 완성한 것을 정리하고 다음 여정의 여백을 남겨보세요.", wish: "나는 나의 여정을 소중히 간직합니다.", image: "assets/21.webp", symbol: "✧" }
+    ];
+
+    let readingMode = 'one';
+    let topic = '오늘의 마음';
+    let current = null;
+    let currentQuestion = '';
+
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    // 1. 스플래시 화면 제어 (이미지 터치 시 본 화면 진입)
+    const splash = $('#splash-screen');
+    function enterApp() {
+      splash.classList.add('hidden');
+    }
+    splash.addEventListener('click', enterApp);
+    splash.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        enterApp();
+      }
+    });
+
+    // 헤더에서 인트로 포스터 다시 열기
+    $('#open-intro-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      splash.classList.remove('hidden');
+    });
+
+    // 2. 뷰 전환 제어
+    function showView(id) {
+      document.querySelectorAll('.view').forEach(v => v.hidden = v.id !== id);
+      document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === id));
+      if (id === 'journal') renderEntries();
+      if (id === 'shop') renderShop();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => showView(b.dataset.view));
+    $('#brand-home').onclick = (e) => {
+      if (e.target.closest('#open-intro-btn')) return;
+      showView('home');
+    };
+
+    // 3. 주제 칩 선택
+    $('#topics').onclick = e => {
+      if (!e.target.matches('button')) return;
+      document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      topic = e.target.textContent;
+    };
+
+    const advice = {
+      '오늘의 마음': '오늘은 결론보다 마음을 관찰하는 시간을 가져보세요.',
+      '사랑 · 관계': '상대의 속마음을 단정하기보다, 내가 느끼는 마음과 바라는 것을 부드럽게 전해보세요.',
+      '일 · 성장': '이 카드의 메시지를 오늘 할 수 있는 작은 행동 하나로 바꿔보세요.',
+      '돈 · 생활': '돈과 생활의 선택은 실제 예산과 조건을 확인하며 차분히 돌아보세요.'
+    };
+
+    // 4. 카드 결과 모달 열기
+    function openCard(c, drawn = false) {
+      current = c;
+      $('#result-content').innerHTML = `
+        <div class="result-head">
+          <span class="eyebrow">${String(c.id).padStart(2, '0')} · ${esc(c.title)}</span>
+          <img class="result-art" src="${c.image}" alt="${c.name} 아로마타로 원본 카드">
+          <h2>${c.name}</h2>
+          <p class="tag">${c.key}</p>
+        </div>
+        ${drawn && currentQuestion ? `<p class="muted" style="text-align:center;margin:12px 0">“${esc(currentQuestion)}”</p>` : ''}
+        <div class="result-box">
+          <h3>신화가 건네는 메시지</h3>
+          <p>${c.text}</p>
+          ${drawn ? `<p class="muted" style="margin-top:8px">${topic} · ${advice[topic]}</p>` : ''}
+          <h3>나의 기원</h3>
+          <p class="wish">${c.wish}</p>
+        </div>
+        <div class="aroma">
+          <span class="eyebrow">YOUR AROMA</span>
+          <h3>${c.oil}</h3>
+          <p>${c.scent}. 향의 이미지를 떠올리며 잠시 쉬어가세요.</p>
+        </div>
+        <div class="purchase-box">
+          <span class="eyebrow">이야기에서 향기로</span>
+          <h3>오늘의 향, 향담으로 간직해보세요.</h3>
+          <p>${c.name} 카드와 연결된 <strong>${c.oil}</strong>.<br>향담의 구매 가능한 구성은 스마트스토어에서 확인해주세요.</p>
+          <a class="primary buy-link" href="https://m.smartstore.naver.com/sia13" target="_blank" rel="noopener">향담 구매하러 가기 ↗</a>
+          <a class="secondary buy-link" href="https://pf.kakao.com/_pQxgMX" target="_blank" rel="noopener">${c.oil} 향 제작 문의 ↗</a>
+          <button class="copy-inquiry" id="result-copy-message">카드·향 문의 문구 복사</button>
+          <div id="result-copy-status" class="purchase-status" role="status"></div>
+          <p class="notice">연결된 향의 제작 가능 여부와 가격은 문의 후 확인해주세요.</p>
+        </div>
+        <p class="notice">별궁시아 원본 카드와 미니설명서를 바탕으로 구성했습니다. 신화·타로·향의 연결은 별궁시아의 창작 설정입니다.</p>
+      `;
+
+      $('#result-copy-message').onclick = () => copyInquiry('#result-copy-status');
+      $('#save-area').hidden = !drawn;
+      $('#note').value = '';
+      $('#save-status').textContent = '';
+      $('#save').disabled = false;
+      $('#result').showModal();
+    }
+
+    // 5. 카드 뽑기 인터랙션
+    function triggerDraw() {
+      if (readingMode === 'three') {
+        openCheckout();
+        return;
+      }
+      const b = $('#draw');
+      b.disabled = true;
+      b.textContent = '나를 위한 이야기를 고르는 중…';
+      $('#deck').classList.add('shuffle');
+      currentQuestion = $('#question').value.trim();
+
+      setTimeout(() => {
+        const n = new Uint32Array(1);
+        crypto.getRandomValues(n);
+        const picked = cards[Math.floor(n[0] / 4294967296 * cards.length)];
+        openCard(picked, true);
+        b.disabled = false;
+        b.textContent = readingMode === 'three' ? '세 장 리딩 · 9,900원　↗' : '다시 한 장 뽑기 · 무료　↗';
+        $('#deck').classList.remove('shuffle');
+      }, 800);
+    }
+
+    $('#draw').onclick = triggerDraw;
+    $('#deck').onclick = triggerDraw;
+
+    // 모달 닫기
+    $('.close').onclick = () => $('#result').close();
+    $('#result').onclick = e => {
+      if (e.target === $('#result')) {
+        const r = e.target.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+          e.target.close();
+        }
+      }
+    };
+
+    // 6. 카드 도감 렌더링
+    $('#card-grid').innerHTML = cards.map(c => `
+      <button class="mini" data-card="${c.id}">
+        <span class="eyebrow">${String(c.id).padStart(2, '0')} · ${c.title}</span>
+        <img class="mini-art" src="${c.image}" alt="${c.name} 원본 카드" loading="lazy">
+        <h3>${c.name}</h3>
+        <p>${c.key} · ${c.oil}</p>
+      </button>
+    `).join('');
+
+    $('#card-grid').onclick = e => {
+      const b = e.target.closest('[data-card]');
+      if (b) openCard(cards[+b.dataset.card]);
+    };
+
+    // 7. 마음 기록 (LocalStorage)
+    function getEntries() {
+      try {
+        const a = JSON.parse(localStorage.getItem('sia-aroma-journal') || '[]');
+        return Array.isArray(a) ? a.map(x => x.schema === 2 ? x : { ...x, schema: 2, card: ({ 11: 12, 12: 13, 13: 11 })[x.card] ?? x.card }).filter(x => cards[x.card] && typeof x.note === 'string') : [];
+      } catch {
+        return [];
+      }
+    }
+
+    $('#save').onclick = () => {
+      try {
+        const entries = getEntries();
+        entries.unshift({
+          schema: 2,
+          id: Date.now().toString(36) + crypto.getRandomValues(new Uint32Array(1))[0].toString(36),
+          card: current.id,
+          topic,
+          question: currentQuestion,
+          note: $('#note').value,
+          date: new Date().toISOString()
+        });
+        localStorage.setItem('sia-aroma-journal', JSON.stringify(entries));
+        $('#save-status').textContent = '오늘의 카드와 마음을 저장했어요.';
+        $('#save').disabled = true;
+      } catch {
+        $('#save-status').textContent = '이 브라우저에서는 저장할 수 없어요. 브라우저 저장 설정을 확인해주세요.';
+      }
+    };
+
+    function renderEntries() {
+      const es = getEntries();
+      $('#entries').innerHTML = es.length ? es.map(e => `
+        <article class="entry">
+          <button class="plain" data-delete="${esc(e.id)}">삭제</button>
+          <span class="eyebrow">${new Date(e.date).toLocaleDateString('ko-KR')} · ${esc(e.topic)}</span>
+          <h3>${cards[e.card].symbol} ${cards[e.card].name} <small class="muted" style="font:12px sans-serif">${cards[e.card].oil}</small></h3>
+          ${e.question ? `<p class="muted">“${esc(e.question)}”</p>` : ''}
+          <p>${esc(e.note || '이날의 카드만 간직했어요.')}</p>
+        </article>
+      `).join('') : `
+        <div class="empty">
+          <div style="font-size:40px;color:var(--gold)">✧</div>
+          <p>아직 남겨둔 마음이 없어요.<br>카드를 뽑고 오늘의 첫 기록을 남겨보세요.</p>
+          <button class="chip" id="first-draw">첫 카드 뽑으러 가기 ↗</button>
+        </div>
+      `;
+      const b = $('#first-draw');
+      if (b) b.onclick = () => showView('home');
+    }
+
+    $('#entries').onclick = e => {
+      const b = e.target.closest('[data-delete]');
+      if (b && confirm('이 마음 기록을 삭제할까요?')) {
+        try {
+          localStorage.setItem('sia-aroma-journal', JSON.stringify(getEntries().filter(x => x.id !== b.dataset.delete)));
+          renderEntries();
+        } catch {
+          alert('기록을 삭제하지 못했어요.');
+        }
+      }
+    };
+
+    // 8. 문의 문구 복사 기능
+    function inquiryText() {
+      return current
+        ? `안녕하세요. 별궁시아 아로마타로에서 ${current.name} 카드를 뽑았어요. 연결된 아로마는 ${current.oil}입니다. 이 향으로 향담을 주문할 수 있나요? 구매 가능한 색상, 구성, 가격과 배송 안내 부탁드립니다.`
+        : '안녕하세요. 향담을 구매하고 싶어요. 구매 가능한 색상과 향, 구성, 가격과 배송 안내 부탁드립니다.';
+    }
+
+    async function copyInquiry(statusSelector) {
+      const text = inquiryText();
+      try {
+        if (!navigator.clipboard) throw Error();
+        await navigator.clipboard.writeText(text);
+        $(statusSelector).textContent = '복사했어요! 카카오톡 주문 문의를 열어 붙여넣어주세요.';
+      } catch {
+        $(statusSelector).textContent = '아래 문구를 길게 눌러 복사해주세요: ' + text;
+      }
+    }
+
+    function renderShop() {
+      $('#shop-match').innerHTML = current
+        ? `<span class="eyebrow">나의 카드와 연결된 향</span><h3>${current.name} · ${current.oil}</h3><p>${current.scent}</p>`
+        : '<p>향담에서 좋아하는 향을 만나보세요. 카드를 뽑으면 연결된 향도 여기에서 함께 볼 수 있어요.</p>';
+      $('#shop-copy-status').textContent = '';
+    }
+
+    $('#shop-copy-message').onclick = () => copyInquiry('#shop-copy-status');
+    $('#home-shop').onclick = () => showView('shop');
+
+    // 9. 리딩 모드 전환 (1장 / 3장)
+    function setReadingMode(mode) {
+      readingMode = mode;
+      document.querySelectorAll('[data-reading]').forEach(b => {
+        const chosen = b.dataset.reading === mode;
+        b.classList.toggle('selected', chosen);
+        b.setAttribute('aria-pressed', String(chosen));
+      });
+      $('#draw').textContent = mode === 'one' ? '나의 카드 뽑기 · 무료　↗' : '세 장 리딩 · 9,900원　↗';
+      $('#reading-hint').textContent = mode === 'one'
+        ? '22장의 이야기 중, 지금 나를 위한 한 장 · 무료'
+        : '현재 상황 · 장애물 · 조언 + 종합 리딩 · 1회 9,900원';
+    }
+
+    document.querySelectorAll('[data-reading]').forEach(b => b.onclick = () => setReadingMode(b.dataset.reading));
+
+    // 세 장 리딩 모달
+    function openCheckout() {
+      const q = $('#question').value.trim();
+      $('#checkout-question').hidden = !q;
+      $('#checkout-question').textContent = q ? '나의 고민: ' + q : '';
+      $('#checkout').showModal();
+    }
+
+    $('#checkout-close').onclick = () => $('#checkout').close();
+    $('#checkout-free').onclick = () => {
+      $('#checkout').close();
+      setReadingMode('one');
+      $('#draw').focus();
+    };
+
+    // 토스페이먼츠 결제 연동 (3장 심층 리딩 9,900원)
+    const TOSS_CLIENT_KEY = 'test_ck_D5GePWvyJqK4WBaEgQrkrhKXzVoq'; // 토스 공식 테스트 클라이언트 키
+    const btnPayThree = $('#btn-pay-three-cards');
+    if (btnPayThree) {
+      btnPayThree.onclick = () => {
+        try {
+          const q = $('#question').value.trim();
+          const topic = $('#topics .active')?.dataset.topic || '오늘의 운세';
+          
+          // 결제 후 결과 화면에서 사용할 수 있도록 브라우저 세션에 저장
+          sessionStorage.setItem('byeolgung_reading_topic', topic);
+          sessionStorage.setItem('byeolgung_reading_question', q);
+
+          const tossPayments = TossPayments(TOSS_CLIENT_KEY);
+          const orderId = 'SIA_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+
+          tossPayments.requestPayment('카드', {
+            amount: 9900,
+            orderId: orderId,
+            orderName: '별궁시아 아로마타로 세 장 심층 리딩 (1회)',
+            customerName: '별궁시아 방문자',
+            successUrl: window.location.origin + '/success.html',
+            failUrl: window.location.origin + '/fail.html',
+          });
+        } catch (err) {
+          alert('결제창을 실행할 수 없습니다: ' + err.message);
+        }
+      };
+    }
+  </script>
+</body>
+</html>
